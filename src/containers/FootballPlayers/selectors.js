@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { playersFilterSelector } from '../PlayersFilter/selectors';
 
-const footballPlayersSelector = (state) => {
+export const footballPlayersSelector = (state) => {
 	return state.footballPlayers.playersList;
 };
 

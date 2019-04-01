@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { filterFootballPlayers } from './actions';
 import { func } from 'prop-types';
 import { playersFilterSelector } from './selectors';
+import PlayersFilterStyle from './PlayersFilterStyle';
 
 export const POSITIONS_SELECT = [
 	'Position',
@@ -18,7 +19,7 @@ export const POSITIONS_SELECT = [
 	'Right-Back'
 ];
 
-class PlayersFilter extends Component {
+export class PlayersFilter extends Component {
 	constructor(props) {
 		super(props);
 
@@ -50,57 +51,48 @@ class PlayersFilter extends Component {
 		const { filterName, filterPosition, filterAge } = this.state;
 
 		return (
-			<div style={{marginTop: 20 }}>
-				<div className="container" style={{width: '100%'}}>
-					<div className="row">
-						<div className="three columns">
-							<input
-								name="filterName"
-								onChange={this.handleName}
-								value={filterName}
-								className="u-full-width"
-								type="text"
-								placeholder="Player name"
-								id="nameInput"
-							/>
-						</div>
-						<div className="three columns">
-							<select
-								onChange={this.handlePosition}
-								value={filterPosition}
-								className="u-full-width"
-								id="positionSelect"
-							>
-								{POSITIONS_SELECT.map((item) => {
-									return (
-										<option value={item} key={item}>
-											{item}
-										</option>
-									);
-								})}
-							</select>
-						</div>
-						<div className="three columns">
-							<input
-								min={18}
-								max={40}
-								onChange={this.handleAge}
-								value={filterAge}
-								className="u-full-width"
-								type="number"
-								placeholder="Age"
-								id="ageInput"
-							/>
-						</div>
-						<div className="three columns">
-							<input
-								className="button-primary"
-								type="button"
-								value="Search"
-								onClick={this.handleSearch}
-							/>
-						</div>
-					</div>
+			<div className="container" style={PlayersFilterStyle}>
+				<div className="three columns">
+					<input
+						name="filterName"
+						onChange={this.handleName}
+						value={filterName}
+						className="u-full-width"
+						type="text"
+						placeholder="Player name"
+						id="nameInput"
+					/>
+				</div>
+				<div className="three columns">
+					<select
+						onChange={this.handlePosition}
+						value={filterPosition}
+						className="u-full-width"
+						id="positionSelect"
+					>
+						{POSITIONS_SELECT.map((item) => {
+							return (
+								<option value={item} key={item}>
+									{item}
+								</option>
+							);
+						})}
+					</select>
+				</div>
+				<div className="three columns">
+					<input
+						min={18}
+						max={40}
+						onChange={this.handleAge}
+						value={filterAge}
+						className="u-full-width"
+						type="number"
+						placeholder="Age"
+						id="ageInput"
+					/>
+				</div>
+				<div className="three columns">
+					<input className="button-primary" type="button" value="Search" onClick={this.handleSearch} />
 				</div>
 			</div>
 		);

@@ -1,5 +1,7 @@
 import moment from 'moment';
 
+const API_URL = 'https://football-players-b31f2.firebaseio.com/players.json';
+
 const getAgeFromBirth = (dateBirth) => moment().diff(dateBirth, 'years');
 
 const mapFootbalPlayers = (data) => {
@@ -14,7 +16,7 @@ const mapFootbalPlayers = (data) => {
 };
 
 export const apiGetFootbalPlayers = () => {
-	return fetch('https://football-players-b31f2.firebaseio.com/players.json').then((response) => {
+	return fetch(API_URL).then((response) => {
 		return response.ok ? response.json() : null;
 	}).then((res) => {
         if(res) {

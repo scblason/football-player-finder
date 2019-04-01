@@ -14,20 +14,20 @@ export function getFootballPlayers() {
 	};
 }
 
-function fetchFootballPlayers() {
+export function fetchFootballPlayers() {
 	return {
 		type: FETCH_FOOTBALL_PLAYERS
 	};
 }
 
-function fetchFootballPlayersOk(data) {
+export function fetchFootballPlayersOk(data) {
 	return {
 		type: FETCH_FOOTBALL_PLAYERS_OK,
 		payload: data
 	};
 }
 
-function fetchFootballPlayersFail(error) {
+export function fetchFootballPlayersFail(error) {
 	return {
 		type: FETCH_FOOTBALL_PLAYERS_FAIL,
 		payload: error

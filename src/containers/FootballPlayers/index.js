@@ -4,7 +4,10 @@ import { arrayOf, object } from 'prop-types';
 import { getFootballPlayers } from './actions';
 import { filteredFootballPlayers } from './selectors';
 import PlayersFilter from '../PlayersFilter';
-import PlayersTable from '../../components/PlayersTable';
+import PlayersTable from './components/PlayersTable';
+import TitleBar from './components/TitleBar';
+
+const style = { marginTop: 20 };
 
 class App extends Component {
 	constructor(props) {
@@ -22,11 +25,12 @@ class App extends Component {
 	}
 
 	render() {
+		const { fetching } = this.props;
 		return (
-			<div className="container" style={{marginTop: 20}}>
+			<div className="container" style={style}>
 				<div className="row">
 					<div className="twelve columns">
-						<span style={{fontSize: 30}}>Football Player Finder</span>
+						<TitleBar>Football Player Finder</TitleBar>
 					</div>
 				</div>
 				<div className="row">
@@ -36,7 +40,11 @@ class App extends Component {
 				</div>
 				<div className="row">
 					<div className="twelve columns">
-						<PlayersTable footballPlayers={this.props.footballPlayers} />
+						{fetching ? (
+							<h4> Loading... </h4>
+						) : (
+							<PlayersTable footballPlayers={this.props.footballPlayers} />
+						)}
 					</div>
 				</div>
 			</div>
@@ -48,6 +56,9 @@ App.propTypes = {
 	footballPlayers: arrayOf(object)
 };
 
-const mapStateToProps = (state) => ({ footballPlayers: filteredFootballPlayers(state) });
+const mapStateToProps = (state) => ({
+	footballPlayers: filteredFootballPlayers(state),
+	fetching: state.footballPlayers.fetching
+});
 
 export default connect(mapStateToProps, { getFootballPlayers })(App);
